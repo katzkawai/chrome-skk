@@ -10,6 +10,7 @@ function SKK(engineID, dictionary) {
   this.caret = null;
   this.entries = null;
   this.dictionary = dictionary;
+  this.ctrlqPrefix = false;
 }
 
 SKK.prototype.commitText = function(text) {
@@ -190,9 +191,55 @@ SKK.prototype.updateComposition = function() {
 
 SKK.prototype.handleKeyEvent = function(keyevent) {
   // Do not handle modifier only keyevent.
+  // XXX Seems not to work?
   if (keyevent.key.charCodeAt(0) == 0xFFFD) {
     return false;
   }
+
+  // Do not handle modifier only keyevent.
+  // https://www.w3.org/TR/uievents-key/#named-key-attribute-values
+  // XXX Ctrl vs Control?
+  if (keyevent.key == 'Ctrl' || keyevent.key == 'Control' || keyevent.key == 'Shift' || keyevent.key == 'Alt') {
+    return false;
+  }
+
+  if (keyevent.ctrlKey && this.ctrlqPrefix == false) {
+
+    if (keyevent.key == 'q') {
+      this.ctrlqPrefix = true;
+      return true;
+    }
+
+    var code = null;
+    var nullKeyData = {
+      'altKey': false,
+      'ctrlKey': false,
+      'shiftKey': false,
+      'key': '',
+      'code': ''
+    };
+    // https://www.w3.org/TR/uievents-key/#named-key-attribute-values
+    if (keyevent.key == 'a') code = 'Home';
+    if (keyevent.key == 'b') code = 'ArrowLeft';
+    if (keyevent.key == 'd') code = 'Delete';
+    if (keyevent.key == 'e') code = 'End';
+    if (keyevent.key == 'f') code = 'ArrowRight';
+    if (keyevent.key == 'g') code = 'Escape';
+    if (keyevent.key == 'h') code = 'Backspace';
+    if (keyevent.key == 'i') code = 'Tab';
+    if (keyevent.key == 'm') code = 'Enter';
+    if (keyevent.key == 'n') code = 'ArrowDown';
+    if (keyevent.key == 'p') code = 'ArrowUp';
+
+    if (code != null) {
+      var mappedKeyData = {'code': code};
+      var newKeyData = [Object.assign({}, keyevent, nullKeyData, mappedKeyData)];
+      chrome.input.ime.sendKeyEvents({"contextID": this.context, "keyData": newKeyData});
+      return true;
+    }
+
+  }
+  this.ctrlqPrefix = false;
 
   var consumed = false;
   if (this.inner_skk) {

@@ -17,7 +17,7 @@
 #+LATEX_CLASS_OPTIONS: [a4j]
 
 * はじめに
-  Chromebook で動作する SKK です．オリジナルは，以下のすばらしい chrome-skk です:
+  Chromebook (ChromeOS) で動作する SKK です．オリジナルは，以下のすばらしい chrome-skk です:
   + [[https://github.com/jmuk/chrome-skk][jmuk/chrome-skk: An SKK implementation for ChromeOS IME API.]]
   + 参考: [[http://blog.jmuk.org/2012/07/chromeosskk.html][Jun Mukai's blog: ChromeOSで動作するSKKを作った]]
 
@@ -26,8 +26,12 @@
 
   Chromebook の IME を SKK に指定すると，
   ASCII モードで入力中も Emacs-like なキーバインドになります．
-  Ctrol-h を入力して Chrome の history が開いて悲しい思いをしなくなります．
+  C-h を入力して Chrome の history が開いて悲しい思いをしなくなります．
 
+  + Ctrl-a,b,d,e,f,g,h,i,m,n,p は，それらしく動きます
+  + Ctrl-q は，次のキーをそのままシステムに伝えます．例えば，
+    Ctrl-q Ctrl-h は，Ctrl-h として Chrome の履歴が開くでしょう．
+ 
 * 利用方法
   1) このリポジトリを clone
      + TOP/chrome-skk/extension 以下が SKK のコードです．

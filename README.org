@@ -1,0 +1,55 @@
+#+TITLE: chrome-skk
+#+AUTHOR: Yoshinari Nomura
+#+EMAIL:
+#+DATE: 2021-05-29
+#+OPTIONS: H:3 num:2 toc:nil
+#+OPTIONS: ^:nil @:t \n:nil ::t |:t f:t TeX:t
+#+OPTIONS: skip:nil
+#+OPTIONS: author:t
+#+OPTIONS: email:nil
+#+OPTIONS: creator:nil
+#+OPTIONS: timestamp:nil
+#+OPTIONS: timestamps:nil
+#+OPTIONS: d:nil
+#+OPTIONS: tags:t
+#+LANGUAGE: ja
+#+LATEX_CLASS: jsarticle
+#+LATEX_CLASS_OPTIONS: [a4j]
+
+* はじめに
+  Chromebook で動作する SKK です．オリジナルは，以下のすばらしい chrome-skk です:
+  + [[https://github.com/jmuk/chrome-skk][jmuk/chrome-skk: An SKK implementation for ChromeOS IME API.]]
+  + 参考: [[http://blog.jmuk.org/2012/07/chromeosskk.html][Jun Mukai's blog: ChromeOSで動作するSKKを作った]]
+
+  上記リポジトリからの大きな差分は，ASCII モードにおける Emacs バインドの導入と
+  ユーザ辞書登録のバグフィックスです．
+
+  Chromebook の IME を SKK に指定すると，
+  ASCII モードで入力中も Emacs-like なキーバインドになります．
+  Ctrol-h を入力して Chrome の history が開いて悲しい思いをしなくなります．
+
+* 利用方法
+  1) このリポジトリを clone
+     + TOP/chrome-skk/extension 以下が SKK のコードです．
+
+  2) Chrome 拡張として SKK をビルド
+     + Chrome で chrome://extensions/ を開いて「ディベロッパーモード」を on にします．
+     + 「拡張機能をパッケージ化」→ extension/ を指定して extension.crx を作ります．
+
+  3) SKK (extension.crx) をロード
+     + Chrome に extension.crx を Chrome にドラッグ&ドロップします．
+
+  4) SKK を設定
+     + Chrome の設定から使用する IME を SKK にします．
+     + chrome://extensions/ を開いて，SKK 辞書等の初期設定をします．
+
+  5) SKK を使う
+     + Ctrl-j で「かな」が入力できるでしょう．
+
+* 残された課題
+  + [ ] Ignore crostini terminal
+  + [ ] Handle Ctrol-k
+  + [ ] More user-customizable
+
+* ライセンス
+  原著者に確認中です: [[https://github.com/jmuk/chrome-skk/issues/5][License ? · Issue #5 · jmuk/chrome-skk]]

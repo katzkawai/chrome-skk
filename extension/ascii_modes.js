@@ -31,7 +31,11 @@ SKK.registerMode('full-ascii', {
   displayName: '\u5168\u82f1',
   keyHandler: createAsciiLikeMode(function(skk, key) {
     var c = key.charCodeAt(0);
-    if (c >= 0x20 && c < 0x7f) {
+    if (c == 0x20) {
+      skk.commitText(String.fromCharCode(0x3000));
+      return true;
+
+    } else if (c > 0x20 && c < 0x7f) {
       skk.commitText(String.fromCharCode(c + 0xfee0));
       return true;
     }

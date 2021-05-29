@@ -1,7 +1,7 @@
 function SKK(engineID, dictionary) {
   this.engineID = engineID;
   this.context = null;
-  this.currentMode = 'hiragana';
+  this.currentMode = 'ascii';
   this.previousMode = null;
   this.roman = '';
   this.preedit = '';

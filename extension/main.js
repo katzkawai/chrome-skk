@@ -24,6 +24,8 @@ chrome.input.ime.onFocus.addListener(function(context) {
 });
 
 chrome.input.ime.onKeyEvent.addListener(function(engineID, keyData) {
+  console.log(`key = ${keyData.key}, code=${keyData.code}, control = ${keyData.ctrlKey}`);
+
   if (keyData.type != 'keydown') {
     return false;
   }
